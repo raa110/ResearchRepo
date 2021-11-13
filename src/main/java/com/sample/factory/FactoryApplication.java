@@ -49,7 +49,7 @@ public class FactoryApplication {
         };
     }*/
 
-/*    @Bean
+    @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
             LOGGER.info("Started inserting pivoting samples");
@@ -61,7 +61,7 @@ public class FactoryApplication {
             this.pivotParentRepo.saveAll(pivotParents);
             LOGGER.info("Completed inserting test user profile");
         };
-    }*/
+    }
 
     private PivotParent setPivotParent(final String name, final Integer age, final String permCity, final String currCity) {
         final PivotParent pivotParent = new PivotParent();
