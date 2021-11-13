@@ -8,8 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "pivot_parent_child_view")
-public class
-PivotParentChildView {
+public class PivotParentChildView {
 
     @Id
     @Column(name = "id")
