@@ -1,0 +1,32 @@
+Spring:
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: -1
+      max-request-size: -1
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/teletutor_v2?createDatabaseIfNotExist=true&autoReconnect=true
+    username: postgres
+    password: Ccare@123
+
+    hikari:
+      pool-name: sample-connection
+      connection-timeout: 5000
+      maximum-pool-size: 20
+      register-mbeans: true
+
+  jpa:
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  file: D:\dir-1\Sample works\logs\test-run.log
