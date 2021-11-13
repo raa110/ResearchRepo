@@ -8,7 +8,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "pivot_parent_child_view")
-public class PivotParentChildView {
+public class
+PivotParentChildView {
 
     @Id
     @Column(name = "id")
@@ -77,5 +78,16 @@ public class PivotParentChildView {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "PivotParentChildView{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", permanentCity='" + permanentCity + '\'' +
+                ", currentCity='" + currentCity + '\'' +
+                '}';
     }
 }
