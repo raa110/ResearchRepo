@@ -2,7 +2,6 @@ package com.sample.factory.controller;
 
 import com.sample.factory.VO.ResponseVO;
 import com.sample.factory.VO.UserVO;
-import com.sample.factory.abstractTest.User;
 import com.sample.factory.aspect.annotation.NoLogging;
 import com.sample.factory.constant.MessageStore;
 import com.sample.factory.service.UserProfileService;

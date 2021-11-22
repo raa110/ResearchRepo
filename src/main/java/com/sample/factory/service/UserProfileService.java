@@ -8,7 +8,6 @@ import com.sample.factory.exception.ValidationError;
 import com.sample.factory.repo.UserProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Optional;
 import java.util.UUID;
