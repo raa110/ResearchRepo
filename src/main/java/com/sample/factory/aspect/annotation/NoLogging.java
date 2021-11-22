@@ -1,4 +1,4 @@
-package com.sample.factory.aspect;
+package com.sample.factory.aspect.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

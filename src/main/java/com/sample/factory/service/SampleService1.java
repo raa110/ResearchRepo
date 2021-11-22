@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class SampleService1 {
 
     public void print() {
-        System.out.println("PRINT!!!");
+        System.out.println("GPAY-1");
     }
 
 }

@@ -26,7 +26,7 @@ public class LoggingAspect {
     public void controller() {
     }
 
-    @Around("controller() && !@annotation(com.sample.factory.aspect.NoLogging)")
+    @Around("controller() && !@annotation(com.sample.factory.aspect.annotation.NoLogging)")
     public Object profileAllMethods(final JoinPoint joinPoint) throws Throwable {
         final MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         final MethodInvocationProceedingJoinPoint invocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) joinPoint;
@@ -53,12 +53,11 @@ public class LoggingAspect {
             LOGGER.info("Request Id:: " + requestId + ", Method type:: " + request.getMethod() + ", Path:: " + reqPath + ", Mode:: Enter, Target:: " + className + "." + methodName + ", Request Object:: " + requestObjectBuilder);
         }
         //Starting the stop watch for service execution
-        final StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
+        final Long currTimeInMillis = System.currentTimeMillis();
         final Object result = invocationProceedingJoinPoint.proceed();
-        stopWatch.stop();
+        final Long executionTimeInMillis = System.currentTimeMillis() - currTimeInMillis;
         //Log method execution time
-        LOGGER.info("Request Id:: " + requestId + ", Mode:: Exit, Target:: " + className + "." + methodName + ", Execution time:: " + stopWatch.getTotalTimeMillis() + " ms, Result:: ");
+        LOGGER.info("Request Id:: " + requestId + ", Mode:: Exit, Target:: " + className + "." + methodName + ", Execution time:: " + executionTimeInMillis + " ms, Result:: ");
         return result;
     }
 
