@@ -7,9 +7,9 @@ Spring:
       max-request-size: -1
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/teletutor_v2?createDatabaseIfNotExist=true&autoReconnect=true
-    username: postgres
-    password: Ccare@123
+    url: jdbc:postgresql://localhost:5432/default_db?createDatabaseIfNotExist=true&autoReconnect=true
+    username: default_admin
+    password: default_pwd
 
     hikari:
       pool-name: sample-connection
