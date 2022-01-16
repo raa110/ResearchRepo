@@ -1,7 +1,9 @@
 package com.sample.factory;
 
+import com.sample.factory.entity.PerformanceTest;
 import com.sample.factory.entity.PivotChild;
 import com.sample.factory.entity.PivotParent;
+import com.sample.factory.repo.PerformanceTestRepo;
 import com.sample.factory.repo.PivotParentRepo;
 import com.sample.factory.repo.UserProfileRepo;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -31,9 +34,45 @@ public class FactoryApplication {
     @Autowired
     private PivotParentRepo pivotParentRepo;
 
+    @Autowired
+    private PerformanceTestRepo performanceTestRepo;
+
     public static void main(String[] args) {
         SpringApplication.run(FactoryApplication.class, args);
     }
+
+    @Bean
+    public CommandLineRunner commandLineRunner(ApplicationContext context) {
+        return args -> {
+            LOGGER.info("Started inserting performance test data");
+            List<PerformanceTest> performanceTestList = null;
+            int sequenceNum = 65;
+            for (int i = 0; i < 1000000; i++) {
+                if (performanceTestList == null) {
+                    performanceTestList = new LinkedList<>();
+                }
+                if (performanceTestList.size() == 1000) {
+                    this.performanceTestRepo.saveAll(performanceTestList);
+                    LOGGER.info("Inserted 1000 data... and continuing");
+                    performanceTestList = new LinkedList<>();
+                }
+                if (sequenceNum > 90) {
+                    sequenceNum = 65;
+                }
+                final String name = UUID.randomUUID().toString();
+                final int age = (int) (Math.random() * (75 - 18 + 1) + 18);
+                final PerformanceTest performanceTest = new PerformanceTest();
+                performanceTest.setName(name);
+                performanceTest.setAge(age);
+                performanceTest.setSequence(String.valueOf((char) sequenceNum));
+                performanceTest.setLastUpdatedTime(System.currentTimeMillis());
+                performanceTestList.add(performanceTest);
+                sequenceNum++;
+            }
+            LOGGER.info("Completed inserting the performance test data");
+        };
+    }
+
 
     /*@Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
@@ -51,7 +90,7 @@ public class FactoryApplication {
         };
     }*/
 
-    @Bean
+/*    @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
             LOGGER.info("Started inserting pivoting samples");
@@ -63,7 +102,7 @@ public class FactoryApplication {
             this.pivotParentRepo.saveAll(pivotParents);
             LOGGER.info("Completed inserting test user profile");
         };
-    }
+    }*/
 
     private PivotParent setPivotParent(final String name, final Integer age, final String permCity, final String currCity) {
         final PivotParent pivotParent = new PivotParent();

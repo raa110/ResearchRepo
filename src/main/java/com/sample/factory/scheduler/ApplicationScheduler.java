@@ -20,7 +20,7 @@ public class ApplicationScheduler {
     @Transactional
     @Scheduled(fixedDelay = 60000L)
     public void sampleProcedureCall() {
-        this.entityManager.createNativeQuery("call sample_proc()").executeUpdate();
-        LOGGER.info("Sample proc call 2");
+//        this.entityManager.createNativeQuery("call sample_proc()").executeUpdate();
+//        LOGGER.info("Sample proc call 2");
     }
 }

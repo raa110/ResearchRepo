@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "performance_test")
+@Table(name = "performance_test", uniqueConstraints = @UniqueConstraint(name = "performance_test_name", columnNames = {"name"}))
 public class PerformanceTest {
 
     @Id
