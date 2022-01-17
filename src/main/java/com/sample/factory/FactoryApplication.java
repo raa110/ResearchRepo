@@ -1,8 +1,6 @@
 package com.sample.factory;
 
-import com.sample.factory.entity.PerformanceTest;
-import com.sample.factory.entity.PivotChild;
-import com.sample.factory.entity.PivotParent;
+import com.sample.factory.entity.*;
 import com.sample.factory.repo.PerformanceTestRepo;
 import com.sample.factory.repo.PivotParentRepo;
 import com.sample.factory.repo.UserProfileRepo;
@@ -47,7 +45,7 @@ public class FactoryApplication {
             LOGGER.info("Started inserting performance test data");
             List<PerformanceTest> performanceTestList = null;
             int sequenceNum = 65;
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 5000000; i++) {
                 if (performanceTestList == null) {
                     performanceTestList = new LinkedList<>();
                 }
@@ -66,11 +64,28 @@ public class FactoryApplication {
                 performanceTest.setAge(age);
                 performanceTest.setSequence(String.valueOf((char) sequenceNum));
                 performanceTest.setLastUpdatedTime(System.currentTimeMillis());
+                final List<PerformanceTestChildOne> childOnes = new LinkedList<>();
+                childOnes.add(this.getPerformanceTestChildOne(1L, performanceTest, name + "-" + age + "@gmail.com"));
+                childOnes.add(this.getPerformanceTestChildOne(2L, performanceTest, String.valueOf(Math.random())));
+                childOnes.add(this.getPerformanceTestChildOne(3L, performanceTest, "TN"));
+                childOnes.add(this.getPerformanceTestChildOne(4L, performanceTest, "INDIA"));
+                childOnes.add(this.getPerformanceTestChildOne(5L, performanceTest, "+91"));
+                performanceTest.setChildOnes(childOnes);
                 performanceTestList.add(performanceTest);
                 sequenceNum++;
             }
             LOGGER.info("Completed inserting the performance test data");
         };
+    }
+
+    private PerformanceTestChildOne getPerformanceTestChildOne(final Long type, final PerformanceTest performanceTest, final String value) {
+        final PerformanceTestChildOne performanceTestChildOne = new PerformanceTestChildOne();
+        final PerformanceTestChildType performanceTestChildType = new PerformanceTestChildType();
+        performanceTestChildType.setId(type);
+        performanceTestChildOne.setPerformanceTest(performanceTest);
+        performanceTestChildOne.setType(performanceTestChildType);
+        performanceTestChildOne.setValue(value);
+        return performanceTestChildOne;
     }
 
 

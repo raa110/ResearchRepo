@@ -3,14 +3,18 @@ package com.sample.factory.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "performance_test", uniqueConstraints = @UniqueConstraint(name = "performance_test_name", columnNames = {"name"}))
+@Table(name = "performance_test", uniqueConstraints =
+@UniqueConstraint(name = "performance_test_name", columnNames = {"name"}))
 public class PerformanceTest {
 
     @Id
@@ -30,4 +34,8 @@ public class PerformanceTest {
 
     @Column(name = "last_updated_time", nullable = false)
     private Long lastUpdatedTime;
+
+    @OneToMany(mappedBy = "performanceTest", targetEntity = PerformanceTestChildOne.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<PerformanceTestChildOne> childOnes;
 }
